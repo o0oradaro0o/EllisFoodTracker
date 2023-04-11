@@ -76,7 +76,7 @@ function CheckOilTimes() {
         let result = response.result;
         if (result.values && result.values.length > 0) {
             // for each of the 3 values check if the date stored is todays date.  if it is add one to the oil given counter
-            for (let i = 0; i < result.values.length; i++) {
+            for (let i = 1; i < 4; i++) {
                 let oilTime = new Date(result.values[1][i]);
                 let currentTime = new Date();
                 if (oilTime.getDate() == currentTime.getDate() && oilTime.getMonth() == currentTime.getMonth() && oilTime.getFullYear() == currentTime.getFullYear()) {
