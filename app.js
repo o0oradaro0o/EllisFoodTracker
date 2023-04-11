@@ -25,7 +25,7 @@ function updateTimer() {
         CheckOilTimes();
     }
 
-    timerElement.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    timer.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
 }
 
 function updateButtonPressTime() {
@@ -105,7 +105,7 @@ function getLastButtonPressTime()
             lastPressTimeElement.innerHTML = `Last press time: ${updateTime.toLocaleString("en-US", { timeZone: "America/Chicago" })}`;
             setInterval(updateTimer, 1000);
         } else {
-            timerElement.innerHTML = 'No data found.';
+            timer.innerHTML = 'No data found.';
         }
     }, error => {
         console.error(error.result.error.message);
