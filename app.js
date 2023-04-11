@@ -64,7 +64,7 @@ function initClient() {
     console.log('Initializing client...');
         gapi.client.init({
             apiKey: apiKey,
-            client_id: '664462795185-chgijhnh0k248ij629skno88rhviq18u.apps.googleusercontent.com',
+            client_id: ' 664462795185-8rf7aaqt8dsuu93oieiflh75qf0ftqbm.apps.googleusercontent.com',
             scope: 'https://www.googleapis.com/auth/spreadsheets',
             discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
         }).then(() => {
