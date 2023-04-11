@@ -52,7 +52,7 @@ function updateOilTime() {
     console.log( gapi.client);
     gapi.client.sheets.spreadsheets.values.update({
         spreadsheetId: sheetId,
-        range: 'Sheet1!B1:B'+sheetpos,
+        range: 'Sheet1!B1'+sheetpos+':B'+sheetpos,
         valueInputOption: 'RAW',
         resource: {
             values: [[currentTime]]
