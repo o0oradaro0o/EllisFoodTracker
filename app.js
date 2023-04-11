@@ -131,7 +131,12 @@ function initClient() {
         });
 }
 function handleSignInClick(event) {
+    pressButton.style.visibility = 'visible';
+    pressButtonOil.style.visibility = 'visible';
+    signin-button.style.visibility = 'hidden';
     gapi.auth2.getAuthInstance().signIn();
+    // make pressButton and pressButtonoil visible
+
   }
 
 gapi.load('client', initClient);

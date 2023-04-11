@@ -22,6 +22,13 @@ button {
     margin-top: 20px;
     transition: background-color 0.3s;
 }
+/* make pressButton not be visable */
+#pressButton {
+    visibility: hidden;
+}
+#pressButtonOil {
+    visibility: hidden;
+}
 
 button:hover {
     background-color: #45a049;
@@ -36,7 +43,10 @@ button:hover {
     <script src="app.js"></script>
 </head>
 <body>
+    
     <div class="container">
+        <button id="signin-button" onclick="handleSignInClick()">Sign in to update the sheet.</button>
+    
         <h1>Time since last feed:</h1>
         <p id="timer">Loading...</p>
         <p id="lastPressTime">Last feed time: N/A</p>
@@ -47,6 +57,6 @@ button:hover {
         <p id="oilCountElement">Ellis has had his oil: N/A Times</p>
         <button id="pressButtonOil" onclick="updateOilTime()">Press me when you Give the baby oil!</button>
     </div>
-    <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
+    
 </body>
 </html>
