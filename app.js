@@ -2,7 +2,7 @@ let timerElement = document.getElementById('timer');
 let lastPressTimeElement = document.getElementById('lastPressTime');
 let button = document.getElementById('pressButton');
 let updateTime;
-
+let oilCount = 0;
 // Replace with your own Google Sheets API key and Sheet ID
 const apiKey = 'AIzaSyB9e2GXqhq9CVH3uCc1cLZhTpx1DGGOQFc';
 const sheetId = '1wwP-3RjsNA8t6CetYyCmQtCrRSqb11P1myH-aJTbd8A';
@@ -16,7 +16,7 @@ function updateTimer() {
     let minutes = Math.floor(seconds / 60);
     let hours = Math.floor(minutes / 60);
     let days = Math.floor(hours / 24);
-    let oilCount = 0;
+
     hours %= 24;
     minutes %= 60;
     seconds %= 60;
