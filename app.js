@@ -48,7 +48,6 @@ function updateButtonPressTime() {
 
 function updateOilTime() {
     let sheetpos = oilCount+1
-    oilCount++;
     let currentTime = new Date().toISOString();
     console.log( gapi.client);
     gapi.client.sheets.spreadsheets.values.update({
@@ -68,6 +67,7 @@ function updateOilTime() {
 }
 
 function CheckOilTimes() {
+    oilCount = 0;
     console.log('Getting last button press time...');
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: sheetId,
