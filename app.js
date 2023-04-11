@@ -133,7 +133,7 @@ function initClient() {
 function handleSignInClick(event) {
     pressButton.style.visibility = 'visible';
     pressButtonOil.style.visibility = 'visible';
-    signin-button.style.visibility = 'hidden';
+    signinbutton.style.visibility = 'hidden';
     gapi.auth2.getAuthInstance().signIn();
     // make pressButton and pressButtonoil visible
 
