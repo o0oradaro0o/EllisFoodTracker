@@ -47,6 +47,12 @@ function updateButtonPressTime() {
 }
 
 function updateOilTime() {
+    //if oilcount is 3 alert the user and do not update
+    if (oilCount == 3) {
+        alert("Ellis has had his oil today");
+        return;
+    }
+
     let sheetpos = oilCount+1
     let currentTime = new Date().toISOString();
     console.log( gapi.client);
@@ -58,7 +64,6 @@ function updateOilTime() {
             values: [[currentTime]]
         }
     }).then(response => {
-        updateTime = new Date(currentTime);
         oilCountElement.innerHTML = `Ellis has had his oil: ${oilCount} Times`;
     }, error => {
         console.error(error.result.error.message);
