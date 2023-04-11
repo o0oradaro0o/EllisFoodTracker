@@ -7,6 +7,7 @@ let updateTime;
 const apiKey = 'AIzaSyB9e2GXqhq9CVH3uCc1cLZhTpx1DGGOQFc';
 const sheetId = '1wwP-3RjsNA8t6CetYyCmQtCrRSqb11P1myH-aJTbd8A';
 const sheetRange = 'Sheet1!A1:A1';
+const sheetRangeOil = 'Sheet1!B1:B3';
 
 function updateTimer() {
     let currentTime = new Date();
@@ -15,10 +16,14 @@ function updateTimer() {
     let minutes = Math.floor(seconds / 60);
     let hours = Math.floor(minutes / 60);
     let days = Math.floor(hours / 24);
-
+    let oilCount = 0;
     hours %= 24;
     minutes %= 60;
     seconds %= 60;
+    // at midnight CheckOilTimes()
+    if (hours == 0 && minutes == 0 && seconds == 0) {
+        CheckOilTimes();
+    }
 
     timerElement.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
 }
@@ -41,7 +46,54 @@ function updateButtonPressTime() {
     });
 }
 
-function getLastButtonPressTime() {
+function updateOilTime() {
+    let sheetpos = oilCount+1
+    let currentTime = new Date().toISOString();
+    console.log( gapi.client);
+    gapi.client.spreadsheets.values.update({
+        spreadsheetId: sheetId,
+        range: 'Sheet1!B1:B'+sheetpos,
+        valueInputOption: 'RAW',
+        resource: {
+            values: [[currentTime]]
+        }
+    }).then(response => {
+        updateTime = new Date(currentTime);
+        lastPressTimeElement.innerHTML = `Last press time: ${updateTime.toLocaleString("en-US", { timeZone: "America/Chicago" })}`;
+    }, error => {
+        console.error(error.result.error.message);
+    });
+    oilCount++;
+}
+
+function CheckOilTimes() {
+    console.log('Getting last button press time...');
+    gapi.client.spreadsheets.values.get({
+        spreadsheetId: sheetId,
+        range: sheetRangeOil,
+    }).then(response => {
+        let result = response.result;
+        if (result.values && result.values.length > 0) {
+            // for each of the 3 values check if the date stored is todays date.  if it is add one to the oil given counter
+            for (let i = 0; i < result.values.length; i++) {
+                let oilTime = new Date(result.values[1][i]);
+                let currentTime = new Date();
+                if (oilTime.getDate() == currentTime.getDate() && oilTime.getMonth() == currentTime.getMonth() && oilTime.getFullYear() == currentTime.getFullYear()) {
+                    oilCount++;
+                }
+            }
+            oilCountElement.innerHTML = 'Ellis has had his oil: ' + oilCount + ' Times';
+        } else {
+            oilCountElement.innerHTML = 'No data found.';
+        }
+    }, error => {
+        console.error(error.result.error.message);
+    });
+}
+
+
+function getLastButtonPressTime()
+{
     console.log('Getting last button press time...');
     gapi.client.spreadsheets.values.get({
         spreadsheetId: sheetId,
@@ -60,6 +112,7 @@ function getLastButtonPressTime() {
     });
 }
 
+
 function initClient() {
     console.log('Initializing client...');
         gapi.client.init({
@@ -70,6 +123,7 @@ function initClient() {
         }).then(() => {
             console.log('Client initialized.');
             getLastButtonPressTime();
+            CheckOilTimes();
         }).catch(error => {
             console.error(error);
         });
