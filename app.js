@@ -103,7 +103,7 @@ function getLastButtonPressTime()
         let result = response.result;
         if (result.values && result.values.length > 0) {
             updateTime = new Date(result.values[0][0]);
-            lastPressTimeElement.innerHTML = `Last press time: ${updateTime.toLocaleString("en-US", { timeZone: "America/Chicago" })}`;
+            lastPressTime.innerHTML = `Last feed time: ${updateTime.toLocaleString("en-US", { timeZone: "America/Chicago" })}`;
             setInterval(updateTimer, 1000);
         } else {
             timer.innerHTML = 'No data found.';
