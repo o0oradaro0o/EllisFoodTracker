@@ -40,7 +40,7 @@ function updateButtonPressTime() {
         }
     }).then(response => {
         updateTime = new Date(currentTime);
-        lastPressTimeElement.innerHTML = `Last press time: ${updateTime.toLocaleString("en-US", { timeZone: "America/Chicago" })}`;
+        lastPressTime.innerHTML = `Last press time: ${updateTime.toLocaleString("en-US", { timeZone: "America/Chicago" })}`;
     }, error => {
         console.error(error.result.error.message);
     });
@@ -48,6 +48,7 @@ function updateButtonPressTime() {
 
 function updateOilTime() {
     let sheetpos = oilCount+1
+    oilCount++;
     let currentTime = new Date().toISOString();
     console.log( gapi.client);
     gapi.client.sheets.spreadsheets.values.update({
@@ -59,7 +60,7 @@ function updateOilTime() {
         }
     }).then(response => {
         updateTime = new Date(currentTime);
-        lastPressTimeElement.innerHTML = `Last press time: ${updateTime.toLocaleString("en-US", { timeZone: "America/Chicago" })}`;
+        oilCountElement.innerHTML = `Ellis has had his oil: ${oilCount} Times`;
     }, error => {
         console.error(error.result.error.message);
     });
