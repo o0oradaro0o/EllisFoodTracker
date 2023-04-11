@@ -39,8 +39,6 @@ function updateButtonPressTime() {
             values: [[currentTime]]
         }
     }).then(response => {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
-        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
         updateTime = new Date(currentTime);
         lastPressTimeElement.innerHTML = `Last press time: ${updateTime.toLocaleString("en-US", { timeZone: "America/Chicago" })}`;
     }, error => {
