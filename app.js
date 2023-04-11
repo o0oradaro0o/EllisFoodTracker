@@ -31,7 +31,7 @@ function updateTimer() {
 function updateButtonPressTime() {
     let currentTime = new Date().toISOString();
     console.log( gapi.client);
-    gapi.client.spreadsheets.values.update({
+    gapi.client.sheets.spreadsheets.values.update({
         spreadsheetId: sheetId,
         range: sheetRange,
         valueInputOption: 'RAW',
@@ -50,7 +50,7 @@ function updateOilTime() {
     let sheetpos = oilCount+1
     let currentTime = new Date().toISOString();
     console.log( gapi.client);
-    gapi.client.spreadsheets.values.update({
+    gapi.client.sheets.spreadsheets.values.update({
         spreadsheetId: sheetId,
         range: 'Sheet1!B1:B'+sheetpos,
         valueInputOption: 'RAW',
@@ -68,7 +68,7 @@ function updateOilTime() {
 
 function CheckOilTimes() {
     console.log('Getting last button press time...');
-    gapi.client.spreadsheets.values.get({
+    gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: sheetId,
         range: sheetRangeOil,
     }).then(response => {
@@ -95,7 +95,7 @@ function CheckOilTimes() {
 function getLastButtonPressTime()
 {
     console.log('Getting last button press time...');
-    gapi.client.spreadsheets.values.get({
+    gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: sheetId,
         range: sheetRange,
     }).then(response => {
